@@ -2,4 +2,40 @@ import pandas as pd
 import numpy as np
 L1 = pd.read_csv('Stress_Dataset.csv')
 L2 = pd.read_csv('StressLevelDataset.csv')
-print(L1.head())
+df = pd.DataFrame
+'''
+# Alias : Question
+
+Have you been dealing with anxiety or tension recently?,Do you face any sleep problems or difficulties falling asleep?,Have you been dealing with anxiety or tension recently?,Have you been getting headaches more often than usual?,Do you get irritated easily?,Do you have trouble concentrating on your academic tasks?,Have you been feeling sadness or low mood?,Have you been experiencing any illness or health issues?,Do you often feel lonely or isolated?,Do you feel overwhelmed with your academic workload?,"Are you in competition with your peers, and does it affect you?",Do you find that your relationship often causes you stress?,Are you facing any difficulties with your professors or instructors?,Is your working environment unpleasant or stressful?,Do you struggle to find time for relaxation and leisure activities?,Is your hostel or home environment causing you difficulties?,Do you lack confidence in your academic performance?,Do you lack confidence in your choice of academic subjects?,Academic and extracurricular activities conflicting for you?,Do you attend classes regularly?,Have you gained/lost weight?,Which type of stress do you primarily experience?
+Q01 : Have you recently experienced stress in your life?
+Q02 : Have you noticed a rapid heartbeat or palpitations?
+Q03 : Have you been dealing with anxiety or tension recently?
+Q04 : Do you face any sleep problems or difficulties falling asleep?
+Q05 : Have you been dealing with anxiety or tension recently? #why is this the
+Q06 : Have you been getting headaches more often than usual?
+Q07 : Do you get irritated easily?
+Q08 : Do you have trouble concentrating on your academic tasks?
+Q09 : Have you been feeling sadness or low mood?
+Q10 : Have you been experiencing any illness or health issues?
+Q11 : Do you often feel lonely or isolated?
+Q12 : Do you feel overwhelmed with your academic workload?
+Q13 : Are you in competition with your peers, and does it affect you?
+Q14 : Do you find that your relationship often causes you stress?
+Q15 : Are you facing any difficulties with your professors or instructors?
+Q16 : Is your working environment unpleasant or stressful?
+Q17 : Do you struggle to find time for relaxation and leisure activities?
+Q18 : Is your hostel or home environment causing you difficulties?
+Q19 : Do you lack confidence in your academic performance?
+Q20 : Do you lack confidence in your choice of academic subjects?
+Q21 : Academic and extracurricular activities conflicting for you?
+Q22 : Do you attend classes regularly?,Have you gained/lost weight?
+Q23 : Which type of stress do you primarily experience?
+'''
+colAliases = {'Have you recently experienced stress in your life?' : 'Q01', 
+             'Have you noticed a rapid heartbeat or palpitations?' : 'Q02', 
+             'Have you been dealing with anxiety or tension recently?' : 'Q03',
+             'Do you face any sleep problems or difficulties falling asleep?' : 'Q04',
+             'Have you been dealing with anxiety or tension recently?' : 'Q05',
+             'Do you attend classes regularly?,Have you gained/lost weight?' : 'Q22'}
+L1.rename(columns=colAliases, inplace=True)
+print(L1)
