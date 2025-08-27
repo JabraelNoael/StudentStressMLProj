@@ -74,3 +74,4 @@ plt.plot(L1['Q01'], L1['Q02'], L1['Q03'], L1['Q04'], L1['Q05'], L1['Q06'], L1['Q
 #plt.show()
 #print(L1[['Q01']])
 '''
+print("hello")
