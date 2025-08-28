@@ -68,10 +68,13 @@ match graphSet:
     case 3: # Shows all raw data
         plt.plot(L2['anxiety_level'], L2['self_esteem'], L2_Beta)
 plt.show()
+#next I want to learn how to make this data into a histogram
+
 
 '''
 plt.plot(L1['Q01'], L1['Q02'], L1['Q03'], L1['Q04'], L1['Q05'], L1['Q06'], L1['Q07'], L1['Q08'], L1['Q09'], L1['Q10'], L1['Q11'], L1['Q12'], L1['Q13'], L1['Q14'], L1['Q15'], L1['Q16'], L1['Q17'], L1['Q18'], L1['Q19'], L1['Q20'], L1['Q21'], L1['Q22'], L1['Q23'])
 #plt.show()
 #print(L1[['Q01']])
 '''
-print("hello")
+
+# Sean I think I should update my own branch in noael/main and you do sean/main or something then we merge them together
