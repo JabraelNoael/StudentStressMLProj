@@ -59,7 +59,7 @@ L1.rename(columns={
 }, inplace=True)
 
 L2_Beta = (L2['mental_health_history'], L2['depression']/6, L2['headache'], L2['blood_pressure'], L2['sleep_quality'], L2['breathing_problem'], L2['noise_level'], L2['living_conditions'], L2['safety'], L2['basic_needs'], L2['academic_performance'], L2['study_load'], L2['teacher_student_relationship'], L2['future_career_concerns'], L2['social_support'], L2['peer_pressure'], L2['extracurricular_activities'], L2['bullying'], L2['stress_level'])
-graphSet = 2
+graphSet = 1
 match graphSet:
     case 1: # Only shows self-reported values rated between 0 and 5
         plt.plot(L2_Beta)
@@ -74,3 +74,4 @@ plt.plot(L1['Q01'], L1['Q02'], L1['Q03'], L1['Q04'], L1['Q05'], L1['Q06'], L1['Q
 #plt.show()
 #print(L1[['Q01']])
 '''
+#I love the color blue
