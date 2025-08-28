@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sb
 L1 = pd.read_csv('Stress_Dataset.csv')
 L2 = pd.read_csv('StressLevelDataset.csv')
 df = pd.DataFrame
@@ -58,7 +59,9 @@ L1.rename(columns={
     'Which type of stress do you primarily experience?': 'Q23'
 }, inplace=True)
 
-L2_Beta = (L2['mental_health_history'], L2['depression']/6, L2['headache'], L2['blood_pressure'], L2['sleep_quality'], L2['breathing_problem'], L2['noise_level'], L2['living_conditions'], L2['safety'], L2['basic_needs'], L2['academic_performance'], L2['study_load'], L2['teacher_student_relationship'], L2['future_career_concerns'], L2['social_support'], L2['peer_pressure'], L2['extracurricular_activities'], L2['bullying'], L2['stress_level'])
+
+L2_Beta = (L2['headache'], L2['blood_pressure'], L2['sleep_quality'], L2['breathing_problem'], L2['noise_level'], L2['living_conditions'], L2['safety'], L2['basic_needs'], L2['academic_performance'], L2['study_load'], L2['teacher_student_relationship'], L2['future_career_concerns'], L2['social_support'], L2['peer_pressure'], L2['extracurricular_activities'], L2['bullying'])
+
 graphSet = 2
 match graphSet:
     case 1: # Only shows self-reported values rated between 0 and 5
@@ -68,13 +71,24 @@ match graphSet:
     case 3: # Shows all raw data
         plt.plot(L2['anxiety_level'], L2['self_esteem'], L2_Beta)
 plt.show()
-#next I want to learn how to make this data into a histogram
-
+'''
+sb.histplot(L2_Beta, bins=5, kde=True)
+plt.show()
+'''
+'''
+means, maxs, mins, modes = [], [], [], []
+print(L2['stress_level'].max())
+print(L2['stress_level'].min())
+for x in L2.columns:
+    means[x] = L2[x].mean()
+    maxs[x] = L2[x].max()
+    mins[x] = L2[x].min()
+    modes[x] = L2[x].mode()
+print(means)
+'''
 
 '''
 plt.plot(L1['Q01'], L1['Q02'], L1['Q03'], L1['Q04'], L1['Q05'], L1['Q06'], L1['Q07'], L1['Q08'], L1['Q09'], L1['Q10'], L1['Q11'], L1['Q12'], L1['Q13'], L1['Q14'], L1['Q15'], L1['Q16'], L1['Q17'], L1['Q18'], L1['Q19'], L1['Q20'], L1['Q21'], L1['Q22'], L1['Q23'])
 #plt.show()
 #print(L1[['Q01']])
 '''
-
-# Sean I think I should update my own branch in noael/main and you do sean/main or something then we merge them together
