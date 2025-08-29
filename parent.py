@@ -41,14 +41,22 @@ def rename_columns(df):
         df.rename(columns = {current_column: f'Q{col}'}, inplace=True)
     return df
 
+#Noeal Stuff
+'''
 L2_Beta = (L2['headache'], L2['blood_pressure'], L2['sleep_quality'], L2['breathing_problem'], L2['noise_level'], L2['living_conditions'], L2['safety'], L2['basic_needs'], L2['academic_performance'], L2['study_load'], L2['teacher_student_relationship'], L2['future_career_concerns'], L2['social_support'], L2['peer_pressure'], L2['extracurricular_activities'], L2['bullying'])
+#
 
 graphSet = 0
 match graphSet:
     case 1: # Only shows self-reported values rated between 0 and 5
         sb.histplot(L2_Beta, bins=5, kde=True)
 plt.show()
+'''
 #next I want to learn how to make this data into a histogram
+####
+
+
+####Noael Stuff
 '''
 means, maxs, mins, modes = [], [], [], []
 
@@ -58,4 +66,52 @@ means, maxs, mins, modes = [], [], [], []
 
 for col in L2.columns:
     print(L2[col])
+
+'''
+###
+
+
+
+
+
+
+#Line Graph function to see relation ship between X's and Y's
+
+y_axis = ['stress_level']
+
+x_axis = [ 'mental_health_history',
+       'headache', 'blood_pressure', 'sleep_quality', 'breathing_problem',
+       'noise_level', 'living_conditions', 'safety', 'basic_needs',
+       'academic_performance', 'study_load', 'teacher_student_relationship',
+       'future_career_concerns', 'social_support', 'peer_pressure',
+       'extracurricular_activities', 'bullying']
+
+
+
+def scatter_graphs(df,x_col,y_col):
+             
+             df_x = df[x_col]
+             df_y = df[y_col]
+            
+
+             for col in range(df_x.shape[1]):
+                   plt.scatter(df_x.iloc[:,col],df_y)
+             
+             plt.xlabel('Independent Variable')
+             plt.ylabel('Stress_Levels(Dependent Variable)')
+             plt.show()
+   
+
+
+
+
+scatter_graphs(L2, x_axis, y_axis)
+#print(L2[x_axis].max())
+
+
+
+            
+            
+
+
 
