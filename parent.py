@@ -67,7 +67,8 @@ match graphSet:
     case 1: # Only shows self-reported values rated between 0 and 5
         sb.histplot(L2_Beta, bins=5, kde=True)
 plt.show()
-
+#next I want to learn how to make this data into a histogram
+'''
 means, maxs, mins, modes = [], [], [], []
 
 #print(L2['stress_level'].max())
