@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-L1 = pd.read_csv('Stress_Dataset.csv')p
+import seaborn as sb
+L1 = pd.read_csv('Stress_Dataset.csv')
 L2 = pd.read_csv('StressLevelDataset.csv')
 df = pd.DataFrame
 '''
@@ -59,24 +60,19 @@ L1.rename(columns={
 }, inplace=True)
 
 
-'''
-L2_Beta = (L2['mental_health_history'], L2['depression']/6, L2['headache'], L2['blood_pressure'], L2['sleep_quality'], L2['breathing_problem'], L2['noise_level'], L2['living_conditions'], L2['safety'], L2['basic_needs'], L2['academic_performance'], L2['study_load'], L2['teacher_student_relationship'], L2['future_career_concerns'], L2['social_support'], L2['peer_pressure'], L2['extracurricular_activities'], L2['bullying'], L2['stress_level'])
-graphSet = 1
+L2_Beta = (L2['headache'], L2['blood_pressure'], L2['sleep_quality'], L2['breathing_problem'], L2['noise_level'], L2['living_conditions'], L2['safety'], L2['basic_needs'], L2['academic_performance'], L2['study_load'], L2['teacher_student_relationship'], L2['future_career_concerns'], L2['social_support'], L2['peer_pressure'], L2['extracurricular_activities'], L2['bullying'])
+
+graphSet = 0
 match graphSet:
     case 1: # Only shows self-reported values rated between 0 and 5
-        plt.plot(L2_Beta)
-    case 2: # Standardizes 0-30 to 0-5 scale by dividing anxiety_level and self_esteem by 6 (W.I.P.)
-        plt.plot(L2['anxiety_level']/6, L2['self_esteem']/6, L2_Beta)
-    case 3: # Shows all raw data
-        plt.plot(L2['anxiety_level'], L2['self_esteem'], L2_Beta)
+        sb.histplot(L2_Beta, bins=5, kde=True)
 plt.show()
 #next I want to learn how to make this data into a histogram
 '''
+means, maxs, mins, modes = [], [], [], []
 
-'''
-plt.plot(L1['Q01'], L1['Q02'], L1['Q03'], L1['Q04'], L1['Q05'], L1['Q06'], L1['Q07'], L1['Q08'], L1['Q09'], L1['Q10'], L1['Q11'], L1['Q12'], L1['Q13'], L1['Q14'], L1['Q15'], L1['Q16'], L1['Q17'], L1['Q18'], L1['Q19'], L1['Q20'], L1['Q21'], L1['Q22'], L1['Q23'])
-#plt.show()
-#print(L1[['Q01']])
-'''
+#print(L2['stress_level'].max())
+#print(L2['stress_level'].min())
 
-print(L2['stress_level'].max())
+for col in L2.columns:
+    print(L2[col])
