@@ -79,36 +79,31 @@ for col in L2.columns:
 
 y_axis = ['stress_level']
 
-x_axis = [ 'mental_health_history',
+x_axis = [
        'headache', 'blood_pressure', 'sleep_quality', 'breathing_problem',
        'noise_level', 'living_conditions', 'safety', 'basic_needs',
        'academic_performance', 'study_load', 'teacher_student_relationship',
        'future_career_concerns', 'social_support', 'peer_pressure',
        'extracurricular_activities', 'bullying']
 
+def scatter_graphs(df, x_col, y_col):
+    df_x = df[x_col]
+    df_y = df[y_col]
 
+    plt.figure(figsize=(10, 6))
+    markers = ['o', 's', '^', 'D', 'v', 'p', '*', 'X', '<', '>', 'h', '8', 'P', 'H', 'd', '|', '_']
+    for col in range(df_x.shape[1]):
+        sizes = np.random.randint(200, 500)
+        marker = markers[col % len(markers)]
+        plt.scatter(df_x.iloc[:, col], df_y.values.flatten(), s=sizes, alpha=0.3, label=x_col[col], marker=marker)
 
-def scatter_graphs(df,x_col,y_col):
-             
-             df_x = df[x_col]
-             df_y = df[y_col]
-            
-
-             for col in range(df_x.shape[1]):
-                   plt.scatter(df_x.iloc[:,col],df_y)
-             
-             plt.xlabel('Independent Variable')
-             plt.ylabel('Stress_Levels(Dependent Variable)')
-             plt.show()
-   
-
-
+    plt.xlabel('Independent Variables')
+    plt.ylabel('Stress_Levels (Dependent Variable)')
+    plt.legend(loc='best')
+    plt.show()
 
 
 scatter_graphs(L2, x_axis, y_axis)
-#print(L2[x_axis].max())
-
-
 
             
             
