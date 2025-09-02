@@ -3,6 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sb
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression
+import scipy.stats as stats
+from scipy.stats import spearmanr
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 L1 = pd.read_csv('Stress_Dataset.csv')
 L2 = pd.read_csv('StressLevelDataset.csv')
@@ -43,11 +47,7 @@ def rename_columns(df):
         df.rename(columns = {current_column: f'Q{col}'}, inplace=True)
     return df
 
-#Noeal Stuff
-
 L2_Beta = np.array((L2['headache'], L2['blood_pressure'], L2['sleep_quality'], L2['breathing_problem'], L2['noise_level'], L2['living_conditions'], L2['safety'], L2['basic_needs'], L2['academic_performance'], L2['study_load'], L2['teacher_student_relationship'], L2['future_career_concerns'], L2['social_support'], L2['peer_pressure'], L2['extracurricular_activities'], L2['bullying']))
-L2_Beta2 = L2['headache', 'blood_pressure', 'sleep_quality', 'breathing_problem', 'noise_level', 'living_conditions', 'safety', 'basic_needs', 'academic_performance', 'study_load', 'teacher_student_relationship', 'future_career_concerns', 'social_support', 'peer_pressure', 'extracurricular_activities', 'bullying']
-print(L2_Beta2.head)
 
 ####Noael Stuff
 '''
@@ -65,11 +65,13 @@ for col in L2.columns:
 
 y_axis = ['stress_level']
 
-x_axis = [ 'mental_health_history',
-       'headache', 'blood_pressure', 'sleep_quality', 'breathing_problem',
-       'noise_level', 'living_conditions', 'safety', 'basic_needs',
-       'academic_performance', 'study_load', 'teacher_student_relationship',
-       'future_career_concerns', 'social_support', 'peer_pressure',
+#Removed predictors, also removed social support and blood pressure since theor scale is 0-3
+#Removed predictors breathing_problems,living_conditions,student_teacher_relationship,study_load,peer_pressure for p <.7
+#Might add back Study load and peer preasure because logicly they make sense to keep
+x_axis = ['headache', 'sleep_quality',
+       'noise_level', 'safety', 'basic_needs',
+       'academic_performance',
+       'future_career_concerns',
        'extracurricular_activities', 'bullying']
 
 def scatter_graphs(df,x_col,y_col):
@@ -121,6 +123,72 @@ def gradient_descent(predictors):
 
     plt.legend()
     plt.show()
+
+x_and_y =  ['stress_level', 'headache', 'sleep_quality',
+       'noise_level', 'safety', 'basic_needs',
+       'academic_performance',
+       'future_career_concerns',
+       'extracurricular_activities', 'bullying','social_support','blood_pressure']
+
+def scatter_graphs(df, x_col, y_col):
+    df_x = df[x_col]
+    df_y = df[y_col]
+
+    plt.figure(figsize=(10, 6))
+    markers = ['o', 's', '^', 'D', 'v', 'p', '*', 'X', '<', '>', 'h', '8', 'P', 'H', 'd', '|', '_']
+    for col in range(df_x.shape[1]):
+        sizes = np.random.randint(200, 500)
+        marker = markers[col % len(markers)]
+        plt.plot(df_x.iloc[:, col], df_y.values.flatten(), s=sizes, alpha=0.3, label=x_col[col], marker=marker)
+
+    plt.xlabel('Independent Variables')
+    plt.ylabel('Stress_Levels (Dependent Variable)')
+    plt.legend(loc='best')
+    plt.show()
+
+#scatter_graphs(L2, x_axis, y_axis)
+
+#Correlation HeatMap Using Spearman
+def plot_correlation_heatmap(df):
+    correlation = df.corr(method='spearman')
+    plt.figure(figsize=(12, 8))
+    sb.heatmap(correlation, annot=True, cmap='coolwarm', fmt=".2f")
+    plt.show()
+
+#plot_correlation_heatmap(L2)
+
+
+#Check which is signifcant based of alpha = 0.05
+def spearman_significance(x_col, y_col, alpha=0.05):
+
+    significant_predictors = []
+
+    for col in range(x_col.shape[1]):
+        rho, p = spearmanr(x_col.iloc[:, col], y_col)
+        
+        if p < alpha:
+            significant_predictors.append(x_col.columns[col])
+
+    return significant_predictors
+
+
+significant_predictors = spearman_significance(L2[x_axis], L2[y_axis])
+#print("Significant predictors:", significant_predictors)
+
+#Calculate VIF
+def calculate_vif(dataset):
+    vif = pd.DataFrame()
+    vif['features'] = dataset.columns
+    vif['VIF_Value'] = [variance_inflation_factor(dataset.values,i) for i in range(dataset.shape[1])]
+    
+    return(vif)
+
+#predictors = L2.copy()
+#predictors = predictors[x_axis]
+#print(calculate_vif(predictors))
+plot_correlation_heatmap(L2[x_and_y])
+#print("Significant predictors:", significant_predictors)
+#print(L2.columns)
 
 graphSet = 0
 match graphSet:
