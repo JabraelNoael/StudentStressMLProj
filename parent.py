@@ -62,7 +62,13 @@ for col in L2.columns:
     print(L2[col])
 
 '''
-#Scatterplot function to see relation ship between X's and Y's
+###
+
+
+
+
+
+#Line Graph function to see relation ship between X's and Y's
 
 y_axis = ['stress_level']
 
@@ -205,7 +211,6 @@ def calculate_vif(dataset):
 #predictors = predictors[x_axis]
 #print(calculate_vif(predictors))
 #print("Significant predictors:", significant_predictors)
-#print(L2.columns)
 
 graphSet = 4
 match graphSet:
