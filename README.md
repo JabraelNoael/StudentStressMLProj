@@ -4,7 +4,7 @@ Data Source: [Kaggle](https://www.kaggle.com/datasets/mdsultanulislamovi/student
 
 ---
 
-## StressLevelDataaset (Legend)
+## StressLevelDataset (Legend)
 ### Dependent Variables (Y)
 - **mental_health_history** = {(0 : false), (1 : true)}
 - **anxiety_level** = (int 0-30)
