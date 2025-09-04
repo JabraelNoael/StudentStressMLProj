@@ -5,6 +5,9 @@ import seaborn as sb
 import scipy.stats as stats
 from scipy.stats import spearmanr
 from statsmodels.stats.outliers_influence import variance_inflation_factor
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, confusion_matrix
 
 L1 = pd.read_csv('Stress_Dataset.csv')
 L2 = pd.read_csv('StressLevelDataset.csv')
@@ -47,8 +50,9 @@ def rename_columns(df):
 
 #Noeal Stuff
 
-L2_Beta = (L2['headache'], L2['blood_pressure'], L2['sleep_quality'], L2['breathing_problem'], L2['noise_level'], L2['living_conditions'], L2['safety'], L2['basic_needs'], L2['academic_performance'], L2['study_load'], L2['teacher_student_relationship'], L2['future_career_concerns'], L2['social_support'], L2['peer_pressure'], L2['extracurricular_activities'], L2['bullying'])
-#
+L2_Beta = L2.copy()
+L2_Beta = L2_Beta.drop(columns = ['social_support','blood_pressure'])
+
 
 graphSet = 0
 match graphSet:
@@ -80,22 +84,15 @@ for col in L2.columns:
 
 #Line Graph function to see relation ship between X's and Y's
 
-y_axis = ['stress_level']
+y_axis = L2_Beta['stress_level']
 
 #Removed predictors, also removed social support and blood pressure since theor scale is 0-3
 #Removed predictors breathing_problems,living_conditions,student_teacher_relationship,study_load,peer_pressure for p <.7
 #Might add back Study load and peer preasure because logicly they make sense to keep
-x_axis = ['headache', 'sleep_quality',
-       'noise_level', 'safety', 'basic_needs',
-       'academic_performance',
-       'future_career_concerns',
-       'extracurricular_activities', 'bullying']
+x_axis = L2_Beta.drop(columns = ['stress_level'])
 
-x_and_y =  ['stress_level', 'headache', 'sleep_quality',
-       'noise_level', 'safety', 'basic_needs',
-       'academic_performance',
-       'future_career_concerns',
-       'extracurricular_activities', 'bullying','social_support','blood_pressure']
+x_and_y =  L2_Beta.copy()
+
 
 def scatter_graphs(df, x_col, y_col):
     df_x = df[x_col]
@@ -153,6 +150,16 @@ def calculate_vif(dataset):
 #predictors = L2.copy()
 #predictors = predictors[x_axis]
 #print(calculate_vif(predictors))
-plot_correlation_heatmap(L2[x_and_y])
+#plot_correlation_heatmap(L2[x_and_y])
 #print("Significant predictors:", significant_predictors)
 #print(L2.columns)
+
+def logistic_regression(dfx,dfy):
+    X_train,X_test,y_train,y_test = train_test_split(dfx,dfy,test_size=0.7, random_state=42)
+    model = LogisticRegression(multi_class='multinomial')
+    model.fit(X_train,y_train)
+    y_pred = model.predict(X_test)
+
+    return model.score(X_test,y_test), classification_report(y_test, y_pred), confusion_matrix(y_test, y_pred)
+
+logistic_regression(x_axis, y_axis)
