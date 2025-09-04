@@ -3,7 +3,8 @@
 Data Source: [Kaggle](https://www.kaggle.com/datasets/mdsultanulislamovi/student-stress-monitoring-datasets?resource=download&SSORegistrationToken=CfDJ8BfigAjZUoJHuOjXpienVtDbGExeMzM5KlyH9fiZoi8LRsQEEePfUw8yadlGTGQwleoOxpJ27NNVLIWhxS2zBa4TFz01S1QcMkIhK9Uujcu4CR7MDdsH9jkem9jlzBfufOqe7lDX-sgBBh9dk5vDVfgEYvfCrR_KeZQC2iUsMQgJccih-EX1eiWzSxeFZgqjxsjB2QRpHSDnVdQZss7dVDAHH2gjc5hQLumoGuAke4sTYBoHwNcUAIQRyKJOAG_T9crxArU7c5Gh8i7Y7cU_-2Y-hlZn13WyaHKjtgYDjSZ6uJoi-WOapITklkyvoWhvZ_Qx5hb57zb8eTCzarmtrgcnNFyV&DisplayName=Noael%20Jabrael)
 
 ---
-## StressLevelDataaset (Legend)
+## StressLevelDataset (Legend)
+
 ### Dependent Variables (Y)
 - **mental_health_history** = {(0 : false), (1 : true)}
 - **anxiety_level** = (int 0-30)
